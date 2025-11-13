@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Calcolatrice Stipendio Netto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+    <h1>Calcolatrice Stipendio Netto</h1>
+    <div class="nota">Questa calcolatrice è valida fino a circa 55.000 kr</div>
+
+    <div class="grid">
+      <div class="sezione-titolo">Parametri generali</div>
+
+      <div>
+        <label for="pagaOraria">Paga oraria (kr)</label>
+        <input type="number" id="pagaOraria" step="0.01" value="145">
+      </div>
+
+      <div>
+        <label for="pensioneFissa">Pensione fissa (kr)</label>
+        <input type="number" id="pensioneFissa" step="0.01" value="99">
+      </div>
+
+      <div>
+        <label for="aliquotaContributo">Aliquota contributo lavoro (%)</label>
+        <input type="number" id="aliquotaContributo" step="0.01" value="8">
+      </div>
+
+      <div>
+        <label for="aliquotaTasse">Aliquota tasse (%)</label>
+        <input type="number" id="aliquotaTasse" step="0.01" value="36">
+      </div>
+
+      <div class="sezione-titolo">Dati lavoratore</div>
+
+      <div>
+        <label for="oreLavorate">Ore lavorate</label>
+        <input type="number" id="oreLavorate" step="0.01" value="190">
+      </div>
+
+      <div>
+        <label for="deduzioni">Deduzioni (kr)</label>
+        <input type="number" id="deduzioni" step="0.01" value="4996">
+        <small class="hint">
+          Le deduzioni sono individuali e si vedono nella busta paga come “fradrag”.
+        </small>
+      </div>
+    </div>
+
+    <button onclick="calcola()">Calcola stipendio netto</button>
+
+    <div class="risultati" id="risultati">
+      <p id="lordo"></p>
+      <p id="base1"></p>
+      <p id="contributo"></p>
+      <p id="baseTasse"></p>
+      <p id="tasse"></p>
+      <p id="tasseTotali"></p>
+      <p id="tassePercentuale"></p>
+      <p class="evidenziato" id="netto"></p>
+      <p id="nettoEuro"></p>
+    </div>
+  </div>
+
+  <script>
+    function calcola() {
+      let pagaOraria = parseFloat(document.getElementById("pagaOraria").value);
+      let pensioneFissa = parseFloat(document.getElementById("pensioneFissa").value);
+      let aliquotaContributoPerc = parseFloat(document.getElementById("aliquotaContributo").value);
+      let aliquotaTassePerc = parseFloat(document.getElementById("aliquotaTasse").value);
+      let ore = parseFloat(document.getElementById("oreLavorate").value);
+      let deduzioni = parseFloat(document.getElementById("deduzioni").value);
+
+      if (isNaN(pagaOraria)) pagaOraria = 0;
+      if (isNaN(pensioneFissa)) pensioneFissa = 0;
+      if (isNaN(aliquotaContributoPerc)) aliquotaContributoPerc = 0;
+      if (isNaN(aliquotaTassePerc)) aliquotaTassePerc = 0;
+      if (isNaN(ore)) ore = 0;
+      if (isNaN(deduzioni)) deduzioni = 0;
+
+      const aliquotaContributo = aliquotaContributoPerc / 100;
+      const aliquotaTasse = aliquotaTassePerc / 100;
+
+      // 1) Stipendio lordo (kr)
+      const lordo = ore * pagaOraria;
+
+      // 2) Base dopo pensione
+      const base1 = lordo - pensioneFissa;
+
+      // 3) Contributo lavoro
+      const contributoLavoro = base1 * aliquotaContributo;
+
+      // 4) Base imponibile per le tasse
+      const baseTasse = base1 - contributoLavoro - deduzioni;
+
+      // 5) Tasse
+      const tasse = baseTasse * aliquotaTasse;
+
+      // 6) Tasse totali
+      const tasseTotali = pensioneFissa + contributoLavoro + tasse;
+
+      // 7) Stipendio netto (kr)
+      const netto = lordo - tasseTotali;
+
+      // 8) Conversione in euro (netto / 7.455)
+      const tassoCambio = 7.455;
+      const nettoEuro = netto / tassoCambio;
+
+      // 9) Percentuale tasse totali su lordo
+      let tassePercentuale = 0;
+      if (lordo > 0) {
+        tassePercentuale = (tasseTotali / lordo) * 100;
+      }
+
+      // Mostro i risultati
+      document.getElementById("lordo").textContent =
+        "Stipendio lordo: " + lordo.toFixed(2) + " kr";
+      document.getElementById("base1").textContent =
+        "Base dopo pensione: " + base1.toFixed(2) + " kr";
+      document.getElementById("contributo").textContent =
+        "Contributo lavoro (" + aliquotaContributoPerc + "%): " +
+        contributoLavoro.toFixed(2) + " kr";
+      document.getElementById("baseTasse").textContent =
+        "Base imponibile tasse: " + baseTasse.toFixed(2) + " kr";
+      document.getElementById("tasse").textContent =
+        "Tasse (" + aliquotaTassePerc + "%): " + tasse.toFixed(2) + " kr";
+      document.getElementById("tasseTotali").textContent =
+        "Tasse totali: " + tasseTotali.toFixed(2) + " kr";
+      document.getElementById("tassePercentuale").textContent =
+        "Tasse totali / lordo: " + tassePercentuale.toFixed(2) + " %";
+
+      document.getElementById("netto").textContent =
+        "Stipendio netto: " + netto.toFixed(2) + " kr";
+      document.getElementById("nettoEuro").textContent =
+        "Stipendio netto in euro (≈): " + nettoEuro.toFixed(2) + " €";
+
+      document.getElementById("risultati").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
