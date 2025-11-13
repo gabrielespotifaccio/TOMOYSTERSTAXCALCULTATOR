@@ -1,0 +1,324 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Sfondo assurdo */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: conic-gradient(
+    from 180deg,
+    #ff00c3,
+    #00f7ff,
+    #ffe600,
+    #9d4edd,
+    #ff00c3
+  );
+  background-size: 250% 250%;
+  animation: bg-wiggle 20s ease-in-out infinite alternate;
+  position: relative;
+  color: #111;
+}
+
+/* contenitore centrale: mobile-first (max 420px) */
+.app {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 24px;
+  box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+  padding: 14px 10px 16px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.18), rgba(255,255,255,0.05));
+  backdrop-filter: blur(12px);
+  position: relative;
+}
+
+/* sfondo animato */
+@keyframes bg-wiggle {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 50% 100%; }
+}
+
+/* cerchi decorativi */
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: 0.4;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+body::before {
+  width: 140px;
+  height: 140px;
+  top: -30px;
+  left: -30px;
+  background: radial-gradient(circle, #ff9900, transparent);
+}
+
+body::after {
+  width: 170px;
+  height: 170px;
+  bottom: -40px;
+  right: -20px;
+  background: radial-gradient(circle, #00ffb3, transparent);
+}
+
+/* titolo */
+h1 {
+  text-align: center;
+  margin: 4px 0 6px;
+  font-size: 18px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative;
+}
+
+h1::before {
+  content: "🐚";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-140%) rotate(-15deg);
+}
+
+h1::after {
+  content: "🧮";
+  position: absolute;
+  left: 50%;
+  transform: translateX(40%) rotate(12deg);
+}
+
+/* nota */
+.nota {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #222;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  display: inline-block;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+}
+
+.nota::before {
+  content: "Laboratorio segreto di Tom • ";
+  font-weight: 700;
+  color: #ff00c3;
+}
+
+/* griglia: su telefono -> UNA colonna */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px 12px;
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.25);
+  border: 2px solid rgba(0,0,0,0.06);
+}
+
+/* su schermi più larghi (tablet/desktop) -> due colonne */
+@media (min-width: 700px) {
+  .app {
+    max-width: 840px;
+    padding: 20px 18px 22px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+  }
+}
+
+/* titoli sezione */
+.sezione-titolo {
+  grid-column: 1 / -1;
+  margin-top: 0;
+  font-weight: 800;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #222;
+  position: relative;
+  padding-left: 14px;
+}
+
+.sezione-titolo::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 18px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ff00c3, #00f7ff);
+}
+
+.sezione-titolo::after {
+  content: "✨";
+  margin-left: 6px;
+}
+
+/* label */
+label {
+  font-weight: 700;
+  display: block;
+  font-size: 0.78rem;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+/* input */
+input[type="number"] {
+  width: 100%;
+  padding: 7px 10px;
+  margin-top: 0;
+  border-radius: 999px;
+  border: 2px solid #cfd4da;
+  font-size: 0.85rem;
+  outline: none;
+  background: #f7f7ff;
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    transform 0.08s ease,
+    background 0.16s ease;
+}
+
+/* bordi colorati */
+#pagaOraria      { border-color: #ff00c3; }
+#pensioneFissa   { border-color: #00f7ff; }
+#aliquotaContributo { border-color: #ffe600; }
+#aliquotaTasse   { border-color: #9d4edd; }
+#oreLavorate     { border-color: #ff595e; }
+#deduzioni       { border-color: #43aa8b; }
+
+input[type="number"]:focus {
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.12);
+  transform: translateY(-1px);
+  background: #ffffff;
+}
+
+/* bottone grosso da pollice */
+button {
+  margin-top: 12px;
+  width: 100%;
+  padding: 11px;
+  font-size: 0.9rem;
+  font-weight: 900;
+  cursor: pointer;
+  border-radius: 999px;
+  border: 0;
+  background: repeating-linear-gradient(
+    135deg,
+    #ff00c3 0,
+    #ff00c3 10px,
+    #ffe600 10px,
+    #ffe600 20px
+  );
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  box-shadow: 0 9px 18px rgba(0,0,0,0.45);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+  position: relative;
+}
+
+button::after {
+  content: "🐚";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(10deg);
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 13px 24px rgba(0,0,0,0.55);
+  filter: brightness(1.05);
+}
+
+button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.45);
+}
+
+/* risultati */
+.risultati {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 16px;
+  border: 2px dashed rgba(0,0,0,0.15);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  display: none;
+  position: relative;
+}
+
+.risultati::before {
+  content: "Tom vs Ostriche – Round 1";
+  position: absolute;
+  top: -12px;
+  left: 14px;
+  font-size: 0.7rem;
+  background: #111;
+  color: #fdfdfd;
+  padding: 3px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.risultati p {
+  margin: 2px 0;
+  font-size: 0.82rem;
+  color: #222;
+}
+
+/* netto evidenziato */
+.evidenziato {
+  font-weight: 900;
+  font-size: 0.96rem;
+  margin-top: 8px;
+  padding: 7px 10px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #06d6a0, #80ffdb);
+  color: #111;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.evidenziato::after {
+  content: " 🧠🐚";
+}
+
+.hint {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.7rem;
+  color: #555;
+}
