@@ -19,11 +19,11 @@ body {
   overflow-y: auto;
   background: conic-gradient(
     from 180deg,
-    #ff00c3,
-    #00f7ff,
-    #ffe600,
-    #9d4edd,
-    #ff00c3
+    #00bfff,
+    #87ceeb,
+    #add8e6,
+    #4682b4,
+    #00bfff
   );
   background-size: 250% 250%;
   animation: bg-wiggle 20s ease-in-out infinite alternate;
@@ -67,7 +67,7 @@ body::before {
   height: 140px;
   top: -30px;
   left: -30px;
-  background: radial-gradient(circle, #ff9900, transparent);
+  background: radial-gradient(circle, #00ced1, transparent);
 }
 
 body::after {
@@ -75,7 +75,7 @@ body::after {
   height: 170px;
   bottom: -40px;
   right: -20px;
-  background: radial-gradient(circle, #00ffb3, transparent);
+  background: radial-gradient(circle, #1e90ff, transparent);
 }
 
 /* titolo */
@@ -124,7 +124,7 @@ h1::after {
 .nota::before {
   content: "Laboratorio segreto di Tom • ";
   font-weight: 700;
-  color: #ff00c3;
+  color: #00bfff;
 }
 
 /* griglia: su telefono -> UNA colonna */
@@ -174,7 +174,7 @@ h1::after {
   width: 8px;
   height: 18px;
   border-radius: 999px;
-  background: linear-gradient(180deg, #ff00c3, #00f7ff);
+  background: linear-gradient(180deg, #00bfff, #87ceeb);
 }
 
 .sezione-titolo::after {
@@ -209,12 +209,12 @@ input[type="number"] {
 }
 
 /* bordi colorati */
-#pagaOraria      { border-color: #ff00c3; }
-#pensioneFissa   { border-color: #00f7ff; }
-#aliquotaContributo { border-color: #ffe600; }
-#aliquotaTasse   { border-color: #9d4edd; }
-#oreLavorate     { border-color: #ff595e; }
-#deduzioni       { border-color: #43aa8b; }
+#pagaOraria      { border-color: #00bfff; }
+#pensioneFissa   { border-color: #87ceeb; }
+#aliquotaContributo { border-color: #add8e6; }
+#aliquotaTasse   { border-color: #4682b4; }
+#oreLavorate     { border-color: #5f9ea0; }
+#deduzioni       { border-color: #6495ed; }
 
 input[type="number"]:focus {
   box-shadow: 0 0 0 3px rgba(0,0,0,0.12);
@@ -234,10 +234,10 @@ button {
   border: 0;
   background: repeating-linear-gradient(
     135deg,
-    #ff00c3 0,
-    #ff00c3 10px,
-    #ffe600 10px,
-    #ffe600 20px
+    #00bfff 0,
+    #00bfff 10px,
+    #add8e6 10px,
+    #add8e6 20px
   );
   color: #111;
   text-transform: uppercase;
@@ -305,7 +305,7 @@ button:active {
   margin-top: 8px;
   padding: 7px 10px;
   border-radius: 14px;
-  background: linear-gradient(90deg, #06d6a0, #80ffdb);
+  background: linear-gradient(90deg, #40e0d0, #afeeee);
   color: #111;
   display: inline-block;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
